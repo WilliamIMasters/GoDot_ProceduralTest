@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Terrain.gdshader" type="Shader" id=1]
+
+[sub_resource type="PlaneMesh" id=1]
+size = Vector2( 20, 20 )
+subdivide_width = 255
+subdivide_depth = 255
+
+[sub_resource type="OpenSimplexNoise" id=8]
+period = 152.7
+persistence = 0.212
+lacunarity = 4.0
+
+[sub_resource type="NoiseTexture" id=9]
+seamless = true
+noise = SubResource( 8 )
+
+[sub_resource type="OpenSimplexNoise" id=6]
+
+[sub_resource type="NoiseTexture" id=7]
+as_normalmap = true
+noise = SubResource( 6 )
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 1 )
+shader_param/wavelength = 10.0
+shader_param/height_offset = 2.294
+shader_param/height_scale = 5.0
+shader_param/red = 1.0
+shader_param/noise = SubResource( 9 )
+shader_param/normalmap = SubResource( 7 )
+
+[node name="Spatial" type="Spatial"]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 0.999998, 0.00141529, -0.0013215, -0.00141374, 0.999998, 0.00118356, 0.00132317, -0.0011817, 0.999998, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 3 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 0.999994, -0.0027987, 0.00224862, 0.00279611, 0.999995, 0.00115344, -0.00225184, -0.00114714, 0.999997, 0.479015, 0.940839, -0.277912 )
+light_color = Color( 0.780392, 0.870588, 0.352941, 1 )
+omni_range = 2.431
+omni_attenuation = 1.41421
